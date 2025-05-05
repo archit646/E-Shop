@@ -23,9 +23,26 @@ def products(request,mc,sc,br):
     maincategory=Category.objects.all()
     subcategory=SubCategory.objects.all()
     brand=Brand.objects.all()
-    
-    products=Products.objects.all()
-    params={'maincategory':maincategory,'subcategory':subcategory,'brand':brand,'products':products}
+    if mc=='All' and sc=='All' and br=='All':
+         products=Products.objects.all().order_by('-id')
+    elif mc!='All' and sc=='All' and br=='All':
+        products=Products.objects.filter(category=Category.objects.get(name=mc)).order_by('-id')
+    elif mc!='All' and sc!='All' and br=='All':
+         products=Products.objects.filter(category=Category.objects.get(name=mc),subcategory=SubCategory.objects.get(name=sc)).order_by('-id')
+    elif mc!='All' and sc!='All' and br!='All':
+        products=Products.objects.filter(category=Category.objects.get(name=mc),subcategory=SubCategory.objects.get(name=sc),brand=Brand.objects.get(name=br)).order_by('-id')
+    elif mc=='All' and sc!='All' and br=='All':
+        products=Products.objects.filter(subcategory=SubCategory.objects.get(name=sc)).order_by('-id')
+    elif mc=='All' and sc=='All' and br!='All':
+        products=Products.objects.filter(brand=Brand.objects.get(name=br)).order_by('-id')
+    elif mc!='All' and sc=='All' and br=='All':
+        products=Products.objects.filter(category=Category.objects.get(name=mc)).order_by('-id')
+    elif mc=='All' and sc!='All' and br!='All':
+        products=Products.objects.filter(subcategory=SubCategory.objects.get(name=sc),brand=Brand.objects.get(name=br)).order_by('-id')
+    elif mc!='All' and sc=='All' and br!='All':
+        products=Products.objects.filter(category=Category.objects.get(name=mc),brand=Brand.objects.get(name=br)).order_by('-id')
+        
+    params={'maincategory':maincategory,'subcategory':subcategory,'brand':brand,'products':products,'mc':mc,'sc':sc,'br':br}
     return render(request,'shop/products.html',params)
 
 def checkout(request):
