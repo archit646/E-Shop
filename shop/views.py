@@ -45,5 +45,8 @@ def products(request,mc,sc,br):
     params={'maincategory':maincategory,'subcategory':subcategory,'brand':brand,'products':products,'mc':mc,'sc':sc,'br':br}
     return render(request,'shop/products.html',params)
 
-def checkout(request):
-    return HttpResponse("We are in checkout")
+def detail(request,id):
+    data=Products.objects.get(id=id)
+    params={'data':data}
+    return render(request,'shop/detail.html',params)
+    
