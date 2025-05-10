@@ -88,7 +88,8 @@ def handle_signup(request):
 def handle_logout(request):
     logout(request)
     messages.success(request,'Logout Successfully')
-    return render(request,'shop/login.html')
+    # return render(request,'shop/login.html')
+    return redirect('/shop/login')
 
     
     

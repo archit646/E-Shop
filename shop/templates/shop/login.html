@@ -1,6 +1,5 @@
 {% extends 'shop/index.html' %}
-{% block content %}
-    {% if messages %}
+  {% if messages %}
     {% for message in messages %}
     <div class="flex items-center p-4 mb-4 text-sm rounded-lg 
                 {% if message.tags == 'success' %}
@@ -23,6 +22,7 @@
     </div>
     {% endfor %}
     {% endif %}
+{% block content %}
 <div class="h-[100vh] flex flex-col justify-center">
 <form method="post" class="max-w-sm mx-auto w-full">
     {% csrf_token %}
