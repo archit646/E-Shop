@@ -3,8 +3,8 @@
 <title>Products</title>
 {% endblock %}
 {% block content %}
-<div class="main grid grid-cols-12 gap-4 p-3">
-    <div class="category grid col-span-2 gap-2">
+<div class="main grid grid-cols-12 gap-4 p-3 h-[100vh] ">
+    <div class="category hidden sm:grid col-span-2 gap-2 ">
         <h2 class="bg-blue-700 text-white p-2 text-center text-2xl">Menu</h2>
         <h2 class="bg-violet-600 text-white px-2 text-center text-2xl p-1 font-semibold">Category</h2>
         
@@ -51,9 +51,9 @@
 
 
     </div>
-    <div class="shop col-span-10">
+    <div class="shop col-span-12 sm:col-span-10 border">
         <h2 class="bg-blue-700 text-white p-2 text-center text-2xl">Shop Section</h2>
-        <div class="p-3 grid grid-cols-5 gap-2 place-items-center">
+        <div class="p-3 grid sm:grid-cols-5 gap-2 place-items-center">
         {% for i in products %}
           <!-- Card code -->
           <div class="max-w-[200px] bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 transform transition-transform duration-300 hover:scale-105 hover:shadow-md inline-bloc">

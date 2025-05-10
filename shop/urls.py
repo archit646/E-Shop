@@ -6,9 +6,9 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("",views.index,name='shop_home'),
     path('about/',views.about,name='aboutUs'),
-    path('contact/',views.contact,name='contactUs'),
-    path('tracker/',views.tracker,name='tracking'),
-    path('search/',views.search,name='search'),
+    path('login/',views.handle_login),
+    path('signup/',views.handle_signup),
+    path('logout/',views.handle_logout),
     path('products/<str:mc>/<str:sc>/<str:br>/',views.products,name='products'),
     path('detail/<int:id>',views.detail,name='detail')
 ]
