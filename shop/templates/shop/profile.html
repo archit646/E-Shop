@@ -1,0 +1,94 @@
+{% extends 'shop/index.html' %}
+{% load static %}
+{% block title %}
+<title>Profile</title>
+{% endblock %}
+{% if messages %}
+{% for message in messages %}
+<div class="flex items-center p-4 mb-4 text-sm rounded-lg 
+                {% if message.tags == 'success' %}
+                    text-green-800 bg-green-50 dark:bg-gray-800 dark:text-green-400
+                {% elif message.tags == 'error' %}
+                    text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400
+                {% elif message.tags == 'warning' %}
+                    text-yellow-800 bg-yellow-50 dark:bg-gray-800 dark:text-yellow-400
+                {% else %}
+                    text-blue-800 bg-blue-50 dark:bg-gray-800 dark:text-blue-400
+                {% endif %}" role="alert">
+    <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+        viewBox="0 0 20 20">
+        <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+    </svg>
+    <div>
+        <span class="font-medium">Message:</span> {{ message }}
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+{% block content %}
+<div class="grid sm:grid-cols-2 p-10 gap-5 h-[100vh] ">
+    <div class="left-section flex flex-col justify-center items-center p-[60px] max-h-[800px] overflow-hidden">
+        {% if data.pic %}
+        <img src="{{data.pic.url}}" class="w-full object-cover h-[100%] rounded-xl shadow-xl shadow-black">
+        {% else %}
+        <img src="{% static 'shop/images/banner1.jpg' %}"
+            class="w-full object-cover h-[100%] rounded-xl shadow-xl shadow-black">
+        {% endif %}
+
+
+
+
+
+    </div>
+
+    <div class="right-section flex flex-col justify-center gap-3 ">
+        <h1 class="text-3xl font-bold text-center bg-green-800 p-1">{{data.name}}</h1>
+        <div class="detail-container">
+            <div class="row">
+                <span>Name</span>
+                <p>{{data.name}}</p>
+            </div>
+            <div class="row">
+                <span>Email</span>
+                <p>{{data.email}}</p>
+            </div>
+            <div class="row">
+                <span>Phone</span>
+                <p>{{data.phone}}</p>
+            </div>
+            <div class="row">
+                <span>Adderess1</span>
+                <p>{{data.adderessline1}}</p>
+            </div>
+            <div class="row">
+                <span>Adderess2</span>
+                <p>{{data.adderessline2}}</p>
+            </div>
+            <div class="row">
+                <span>Adderess3</span>
+                <p>{{data.adderessline3}}</p>
+            </div>
+            <div class="row">
+                <span>Pin</span>
+                <p>{{data.pin}}</p>
+            </div>
+            <div class="row">
+                <span>City</span>
+                <p>{{data.city}}</p>
+            </div>
+            <div class="row">
+                <span>State</span>
+                <p>{{data.state}}</p>
+            </div>
+            <div class="button-row flex justify-around">
+                <a href="/shop/update_profile"><button type="button"
+                        class="focus:outline-none cursor-pointer text-white bg-purple-600 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Update
+                        Profile</button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

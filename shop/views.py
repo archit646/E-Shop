@@ -8,6 +8,7 @@ from .models import *
 def index(request):
     products=Products.objects.all()
     params={'products':products}
+    print(request.user)
     return render(request,'shop/index.html',params)
 
 def about(request):
@@ -58,7 +59,7 @@ def handle_login(request):
            return redirect('/shop/')
         else:
            messages.error(request,'Invalid Username or Password')  
-           return render('shop/index.html')
+           return render(request,'shop/login.html')
     return render(request,'shop/login.html')
 
 def handle_signup(request):
@@ -90,6 +91,53 @@ def handle_logout(request):
     messages.success(request,'Logout Successfully')
     # return render(request,'shop/login.html')
     return redirect('/shop/login')
+
+def profile(request):
+    if request.user.is_superuser:
+        return redirect('/shop/admin')
+    else:
+        try:
+           data=Buyer.objects.get(user=request.user)
+        #    print(data.pic.url)
+        except Buyer.DoesNotExist:
+            return redirect('/shop/update_profile')
+    return render(request,'shop/profile.html',{'data':data})
+
+def update_profile(request):
+    try:
+        data=Buyer.objects.get(user=request.user) 
+    except Buyer.DoesNotExist:
+        data=None
+    if request.method=="POST":        
+        name=request.POST.get('name')
+        email=request.POST.get('email')
+        phone=request.POST.get('phone')
+        adderess1=request.POST.get('adderess1')
+        adderess2=request.POST.get('adderess2')
+        adderess3=request.POST.get('adderess3')
+        pin=request.POST.get('pin')
+        city=request.POST.get('city')
+        state=request.POST.get('state')
+        pic=request.FILES.get('pic')
+        if data:
+            data.name=name
+            data.email=email
+            data.phone=phone
+            data.adderessline1=adderess1
+            data.adderessline2=adderess2
+            data.adderessline3=adderess3
+            data.pin=pin
+            data.city=city
+            data.state=state
+            data.pic=pic
+            data.save()
+            
+        else:
+            buyer=Buyer(name=name,user=request.user,email=email,phone=phone,adderessline1=adderess1,adderessline2=adderess2,adderessline3=adderess3,pin=pin,city=city,state=state,pic=pic)
+            buyer.save()
+            messages.success(request,'Profile Updated Successfully')
+            return redirect('/shop/profile')
+    return render(request,'shop/update_profile.html',{'data':data})
 
     
     
