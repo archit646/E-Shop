@@ -51,6 +51,6 @@ class Buyer(models.Model):
     pin=models.IntegerField()
     city=models.CharField(max_length=25)
     state=models.CharField(max_length=40)
-    pic=models.ImageField(upload_to='shop/images',default='',null=True)
+    pic=models.ImageField(upload_to='shop/images',default='',null=True,blank=True)
     def __str__(self):
         return self.name

@@ -80,10 +80,10 @@ def handle_signup(request):
               myuser.last_name=lname
               myuser.save()
               messages.success(request,'Registered Successfully')
-              return render('/shop/login/')
+              return redirect('/shop/login/')
         except:
             messages.error(request,'Internal Error')  
-            return redirect('/shop/signup/')    
+            return render(request,'shop/signup.html')  
     return render(request,'shop/signup.html')
 
 def handle_logout(request):
@@ -102,7 +102,6 @@ def profile(request):
         except Buyer.DoesNotExist:
             return redirect('/shop/update_profile')
     return render(request,'shop/profile.html',{'data':data})
-
 def update_profile(request):
     try:
         data=Buyer.objects.get(user=request.user) 
@@ -129,8 +128,11 @@ def update_profile(request):
             data.pin=pin
             data.city=city
             data.state=state
-            data.pic=pic
+            if pic:
+               data.pic=pic
             data.save()
+            print(pic)
+            return redirect('/shop/profile/')
             
         else:
             buyer=Buyer(name=name,user=request.user,email=email,phone=phone,adderessline1=adderess1,adderessline2=adderess2,adderessline3=adderess3,pin=pin,city=city,state=state,pic=pic)

@@ -4,15 +4,17 @@
 <title>Update Profile</title>
 {% endblock %}
 {% block content %}
-<div class="grid sm:grid-cols-2 p-10 gap-5 h-[100vh]">
+<form method="post" class="grid sm:grid-cols-2 p-10 gap-5 h-[100vh]" enctype="multipart/form-data">
+    {% csrf_token %}
     <div class="left-section flex flex-col justify-center items-center p-[60px] max-h-[800px] overflow-hidden gap-5">
         {% if data.pic %}
         <img src="{{data.pic.url}}" class="w-full object-cover h-[100%] rounded-xl shadow-xl shadow-black">
         {% else %}
-        <img src="{% static 'shop/images/banner1.jpg' %}" class="w-full object-cover h-[100%] rounded-xl shadow-xl shadow-black">
-
+        <img src="{% static 'shop/images/person.jpg' %}" class="w-full object-cover h-[100%] rounded-xl shadow-xl shadow-black">
         {% endif %}
         <input type="file" name="pic">
+
+        
 
 
 
@@ -26,8 +28,7 @@
         <h1 class="text-3xl font-bold text-center bg-green-800 text-white p-1">Update Profile</h1>
 
 
-        <form method="POST" class="max-w-md mx-auto w-full">
-            {% csrf_token %}
+        <div class="max-w-md mx-auto w-full">
             <div class="relative z-0 w-full mb-5 group">
                 <input type="text" name="name" value="{{data.name}}"
                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -93,8 +94,8 @@
             </div>
             <button type="submit"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>
-        </form>
+        </div>
 
     </div>
-</div>
+</form>
 {% endblock %}
