@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import *
@@ -142,33 +143,42 @@ def update_profile(request):
             messages.success(request,'Profile Updated Successfully')
             return redirect('/shop/profile')
     return render(request,'shop/update_profile.html',{'data':data})
-
+@login_required
 def addtoCart(request,id):
-    cart=request.session.get('cart',[])
+    # cart=request.session.get('cart',[])
     
-    data=Products.objects.get(id=id)
+    # data=Products.objects.get(id=id)
     
-    product={'id':id,'image':data.image1.url,'price':data.price,'name':data.product_name}
-    for i in cart:
-        if str(id)==str(i['id']):
-            break
-    else:
-        cart.append(product)
-    request.session['cart']=cart
-    request.session.set_expiry(60*60*24*30)           
+    # product={'id':id,'image':data.image1.url,'price':data.price,'name':data.product_name}
+    # for i in cart:
+    #     if str(id)==str(i['id']):
+    #         break
+    # else:
+    #     cart.append(product)
+    # request.session['cart']=cart
+    # request.session.set_expiry(60*60*24*30)  
+    
+    product=Products.objects.get(id=id)
+    cart=Cart()
+    cart.user=request.user
+    cart.id=product.id
+    cart.product_name=product.product_name
+    cart.price=product.price
+    cart.image=product.image1
+    cart.save()
+           
     return redirect('/shop/get-cart')
 
+@login_required
 def getCart(request):
-    cart=request.session.get('cart',[])
-    # print(cart)
+    cart=Cart.objects.filter(user=request.user)
+    if not cart.exists():
+       messages.warning(request,'Empty Cart , Please Add Your Items')
     return render(request,'shop/cart.html',{'cart':cart})
 
 def deleteCart(request,id):
-    cart=request.session.get('cart',[])
-    request.session['cart']=[item for item in cart if str(id)!=str(item['id'])]
-    # for i in cart:
-    #     :
-    #         i.delete()
+    cart=Cart.objects.get(id=id)
+    cart.delete()
     return redirect('/shop/get-cart')
             
     

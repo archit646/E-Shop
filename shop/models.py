@@ -54,3 +54,10 @@ class Buyer(models.Model):
     pic=models.ImageField(upload_to='shop/images',default='',null=True,blank=True)
     def __str__(self):
         return self.name
+    
+class Cart(models.Model):
+    id=models.AutoField(primary_key=True)
+    product_name=models.CharField(max_length=50)
+    price=models.IntegerField(default=0)
+    image=models.ImageField(upload_to='shop/images',default='')
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
