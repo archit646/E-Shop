@@ -55,6 +55,8 @@ def handle_login(request):
         user=authenticate(username=loginusername,password=loginpassword)
         if user is not None:
            login(request,user)
+           request.session['fname']=request.user.username
+           print(request.user.username)
            messages.success(request,'Logged in Successfully')
            return redirect('/shop/')
         else:
@@ -141,7 +143,33 @@ def update_profile(request):
             return redirect('/shop/profile')
     return render(request,'shop/update_profile.html',{'data':data})
 
+def addtoCart(request,id):
+    cart=request.session.get('cart',[])
     
+    data=Products.objects.get(id=id)
+    
+    product={'id':id,'image':data.image1.url,'price':data.price,'name':data.product_name}
+    for i in cart:
+        if str(id)==str(i['id']):
+            break
+    else:
+        cart.append(product)
+    request.session['cart']=cart
+    request.session.set_expiry(60*60*24*30)           
+    return redirect('/shop/get-cart')
+
+def getCart(request):
+    cart=request.session.get('cart',[])
+    # print(cart)
+    return render(request,'shop/cart.html',{'cart':cart})
+
+def deleteCart(request,id):
+    cart=request.session.get('cart',[])
+    request.session['cart']=[item for item in cart if str(id)!=str(item['id'])]
+    # for i in cart:
+    #     :
+    #         i.delete()
+    return redirect('/shop/get-cart')
+            
     
 
-    

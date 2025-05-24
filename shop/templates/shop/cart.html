@@ -1,0 +1,37 @@
+{% extends 'shop/index.html' %}
+
+{% block title %}
+<title>Document</title>
+{% endblock %}
+
+{% block content %}
+<div class="h-[100vh] overflow-auto">
+    <h1 class="p-4 text-white bg-black mb-3 text-2xl font-bold text-center">Products Cart</h1>
+    <table class="w-full text-center">
+        <tr class="bg-gray-800 text-white">
+            <th class="p-3">Product Name</th>
+            <th class="p-3">Price</th>
+            <th class="p-3">Quantity</th>
+            <th class="p-3">Total Price</th>
+            <th class="p-3">Remove</th>
+        </tr>
+        <tbody class="">
+            {% for item in cart %}
+            <tr class="bg-blue-500 text-white font-semibold border-b-4">
+                <td class="p-4">
+                    <img src="{{item.image}}" height="80px" width="130px" class="mx-auto">
+                    <span class="text-black">{{item.name}}</span>
+                </td>
+                <td>
+                    {{item.price}}
+                </td>
+                <td>1</td>
+                <td>100rs</td>
+                <td><a href="/shop/delete-cart/{{item.id}}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
