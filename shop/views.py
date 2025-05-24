@@ -145,19 +145,6 @@ def update_profile(request):
     return render(request,'shop/update_profile.html',{'data':data})
 @login_required
 def addtoCart(request,id):
-    # cart=request.session.get('cart',[])
-    
-    # data=Products.objects.get(id=id)
-    
-    # product={'id':id,'image':data.image1.url,'price':data.price,'name':data.product_name}
-    # for i in cart:
-    #     if str(id)==str(i['id']):
-    #         break
-    # else:
-    #     cart.append(product)
-    # request.session['cart']=cart
-    # request.session.set_expiry(60*60*24*30)  
-    
     product=Products.objects.get(id=id)
     cart=Cart()
     cart.user=request.user

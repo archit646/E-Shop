@@ -3,5 +3,43 @@
 <title>About</title>
 {% endblock %}
 {% block content %}
-<h1>This is a About Page</h1>
+
+
+    <!-- About Section -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">About Us</h2>
+            <p class="text-gray-600 text-lg">We don’t just sell clothes — we help you express your style.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div>
+                <img src="https://www.zweb123.com/wp-content/uploads/2024/10/eCommerce-Website-by-Z-Web-Solutions.jpg" alt="Fashion Image" class="rounded-xl shadow-md">
+            </div>
+            <div>
+                <h3 class="text-2xl font-semibold text-blue-600 mb-3">Who We Are</h3>
+                <p class="text-gray-700 mb-4">
+                    At <strong>eShop</strong>, we believe fashion should be comfortable, trendy, and affordable. Our journey started in 2023 with a vision to deliver top-notch quality clothes to every doorstep in India.
+                </p>
+                <p class="text-gray-700 mb-4">
+                    From casual wear to party wear, we have outfits for every mood, season, and personality. Whether you're shopping for men, women, or kids, we have something for everyone.
+                </p>
+                <ul class="list-disc list-inside text-gray-700">
+                    <li>✔️ 1000+ Happy Customers</li>
+                    <li>✔️ Weekly New Arrivals</li>
+                    <li>✔️ Affordable & Stylish Clothes</li>
+                    <li>✔️ Easy Returns & Fast Delivery</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="text-center mt-12">
+            <a href="/shop/products/All/All/All/" class="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition">
+                🛍️ Start Shopping
+            </a>
+        </div>
+    </section>
+
+
+
 {% endblock %}
