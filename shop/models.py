@@ -25,7 +25,7 @@ class Products(models.Model):
     category=models.ForeignKey(Category,on_delete=models.CASCADE,default='',null=True,blank=True)
     subcategory=models.ForeignKey(SubCategory,on_delete=models.CASCADE,default='',null=True,blank=True)
     brand=models.ForeignKey(Brand,on_delete=models.CASCADE,default='',null=True,blank=True)
-    size=models.IntegerField(default=0)
+    size=models.CharField(max_length=5)
     color=models.CharField(max_length=20,default='')
     base_price=models.IntegerField(default=0)
     discount=models.IntegerField(default=0)
