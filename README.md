@@ -1,3 +1,16 @@
-# E-Shop
-A E-commerce Website Created using Django.
-Author Name-Archit Kumar
+E-Shop - Django Based Online Shopping Website
+
+A fully functional e-commerce website built using **Python Django**, supporting user authentication, product listings, cart management.
+
+---
+
+## 📌 Features
+
+- User Registration & Login
+- Product Listing with Categories
+- Product Detail Page
+- Add to Cart / Remove from Cart
+- Admin Panel for Product Management
+- Responsive Design using Bootstrap/Tailwind
+- Django Admin for backend control
+
