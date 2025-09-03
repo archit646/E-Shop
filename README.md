@@ -12,7 +12,7 @@ A fully functional e-commerce website built using **Python Django**, supporting 
 
 - Add to Cart / Remove from Cart
 - Admin Panel for Product Management
-- Responsive Design using Bootstrap/Tailwind
+- Responsive Design using Tailwind
 - Django Admin for backend control
 
 - Project Screenshots
