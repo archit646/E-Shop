@@ -16,4 +16,5 @@ A fully functional e-commerce website built using **Python Django**, supporting 
 - Django Admin for backend control
 
 - Project Screenshots
-- 
+- ![Project Screenshot]
+- (Screenshot (24).png)
